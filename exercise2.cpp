@@ -1,7 +1,7 @@
 // C++ program that converts temperatures from Fahrenheit to Centigrade and vice versa based on 
 // the user’s input. It prompts the user for a starting temperature followed by a which type of 
 // conversion then performs the conversion.
-// https://repl.it/@mstoiovici/FahrenheitCentigradeConversion#main.cpp
+// https://repl.it/@mstoiovici/FahrenheitCentigradeConversion1#main.cpp
 #include <iostream>
 using namespace std;
 
@@ -14,10 +14,10 @@ float getTemperatureInput(){
 }
 
 bool isNumeric(string str) {
-   for (int i = 0; i < str.length(); i++)
-      if (isdigit(str[i]) == false)
-         return false; //when one non numeric value is found, return false
-      return true;
+  for (int i = 0; i < str.length(); i++)
+    if ((isdigit(str[i]) == false) && (str[i] != '.'))
+      return false; //when one non numeric value is found and is different than '.', return false
+  return true;
 }
 
 /* Method that takes no parameters and returns a char value that stores the user's input for the type of conversion. */
@@ -51,19 +51,23 @@ int main() {
   float temp;
   float fahrenheit, celsius;
   char option;
+  bool stop = false;
 
-  cout << "Please enter the starting temperature: ";
-  cin >> input;
-  // if user input  for temperature value is not numeric, stop the program
-  if (isNumeric(input)== true){
-    temp = stof(input); // std library's method to cast from a numeric string to a float.
-    option = getValidTypeConversionInput();
+  // Prevent the user from continuing if the starting temperature is not numeric.
+  while (stop == false){
+    cout << "Please enter the starting temperature: ";
+    getline(cin, input);
+    if (isNumeric(input)== true){
+      temp = stof(input); // std library's method to cast from a numeric string to a float.
+      option = getValidTypeConversionInput();
   
-    cout << "Your choice: " << option << endl;
+      cout << "Your choice: " << option << endl;
 
-    convert (temp, option);
-  } else {
-    return 0;
+      convert (temp, option);
+      stop = true;
+    } else {
+      stop = false;
+    }
   }
   return 0;
 }
