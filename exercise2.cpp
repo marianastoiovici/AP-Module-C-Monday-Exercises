@@ -1,4 +1,6 @@
-/* C++ program that converts temperatures from Fahrenheit to Centigrade and vice versa based on the user’s input. It prompts the user for a starting temperature followed by a which type of conversion then performs the conversion. */
+// C++ program that converts temperatures from Fahrenheit to Centigrade and vice versa based on 
+// the user’s input. It prompts the user for a starting temperature followed by a which type of 
+// conversion then performs the conversion.
 // https://repl.it/@mstoiovici/FahrenheitCentigradeConversion#main.cpp
 #include <iostream>
 using namespace std;
@@ -9,6 +11,13 @@ float getTemperatureInput(){
   cout << "Please enter the starting temperature: ";
   cin >> temp; 
   return temp;
+}
+
+bool isNumeric(string str) {
+   for (int i = 0; i < str.length(); i++)
+      if (isdigit(str[i]) == false)
+         return false; //when one non numeric value is found, return false
+      return true;
 }
 
 /* Method that takes no parameters and returns a char value that stores the user's input for the type of conversion. */
@@ -38,16 +47,23 @@ float convert(float temperatureValue, char optionValue){
 }
 
 int main() {
+  string input;
   float temp;
   float fahrenheit, celsius;
   char option;
 
-  temp = getTemperatureInput();
-  option = getValidTypeConversionInput();
+  cout << "Please enter the starting temperature: ";
+  cin >> input;
+  // if user input  for temperature value is not numeric, stop the program
+  if (isNumeric(input)== true){
+    temp = stof(input); // std library's method to cast from a numeric string to a float.
+    option = getValidTypeConversionInput();
   
-  cout << "Your choice: " << option << endl;
+    cout << "Your choice: " << option << endl;
 
-  convert (temp, option);
-  
+    convert (temp, option);
+  } else {
+    return 0;
+  }
   return 0;
 }
