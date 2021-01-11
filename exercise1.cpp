@@ -1,5 +1,5 @@
 /* C++ program that prompts the user for a quote and author and displays them whilst using escape sequences for the quatation marks.*/
-// https://repl.it/@mstoiovici/QuoteAQuote - automatic!
+// https://repl.it/@mstoiovici/QuoteAQuote
 #include <iostream>
 
 int main() {
